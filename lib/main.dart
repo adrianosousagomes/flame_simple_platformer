@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flame_simple_platformer/game/game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: GameWidget(game: SimplePlatformer()),
+        body: GameWidget(game: kDebugMode ? SimplePlatformer() : _game),
       ),
     );
   }

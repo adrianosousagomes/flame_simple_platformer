@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_simple_platformer/game/actors/coin.dart';
+import 'package:flame_simple_platformer/game/actors/platform.dart';
 import 'package:flame_simple_platformer/game/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 
@@ -20,8 +21,23 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
     );
     add(level);
 
-    final spawnPointsLayer =
-        level.tileMap.getObjectGroupFromLayer('SpawnPoints');
+    _spawnActors(level.tileMap);
+
+    return super.onLoad();
+  }
+
+  void _spawnActors(RenderableTiledMap tileMap) {
+    final platformsLayer = tileMap.getObjectGroupFromLayer('Platforms');
+
+    for (var platformObject in platformsLayer.objects) {
+      final platform = Platform(
+        position: Vector2(platformObject.x, platformObject.y),
+        size: Vector2(platformObject.width, platformObject.height),
+      );
+      add(platform);
+    }
+
+    final spawnPointsLayer = tileMap.getObjectGroupFromLayer('SpawnPoints');
 
     for (var spawnPoint in spawnPointsLayer.objects) {
       switch (spawnPoint.type) {
@@ -60,7 +76,5 @@ class Level extends Component with HasGameRef<SimplePlatformer> {
         default:
       }
     }
-
-    return super.onLoad();
   }
 }
