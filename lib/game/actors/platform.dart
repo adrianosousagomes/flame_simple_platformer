@@ -22,7 +22,7 @@ class Platform extends PositionComponent with CollisionCallbacks {
 
   @override
   Future<void>? onLoad() {
-    debugMode = true;
+    debugMode = false;
     add(RectangleHitbox()..collisionType = CollisionType.passive);
     return super.onLoad();
   }

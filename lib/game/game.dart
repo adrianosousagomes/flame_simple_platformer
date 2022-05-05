@@ -1,10 +1,11 @@
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/image_composition.dart';
+import 'package:flame/input.dart';
 
 import 'level/level.dart';
 
-class SimplePlatformer extends FlameGame with HasCollisionDetection {
+class SimplePlatformer extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
   Level? _currentLevel;
   late Image spriteSheet;
 
@@ -19,7 +20,7 @@ class SimplePlatformer extends FlameGame with HasCollisionDetection {
       Vector2(640, 330),
     );
 
-    loadLevel('level2.tmx');
+    loadLevel('level1.tmx');
 
     return super.onLoad();
   }
